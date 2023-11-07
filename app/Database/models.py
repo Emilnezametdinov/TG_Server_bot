@@ -31,7 +31,7 @@ class Timesheet(Base):
     date: Mapped[str] = mapped_column()
 
 async def async_main():
-    async with async_session() as connection:
+    async with engine.begin() as connection:
         await connection.run_sync(Base.metadata.create_all)
 
 
