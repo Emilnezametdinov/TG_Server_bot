@@ -21,7 +21,7 @@ async def cmd_start(msg: Message):
         )
 
 @dp.message(Command("new"))
-async def New(msg: Message, loads: list):
+async def New(msg: Message):
     #loads.append(msg.text)
     #await msg.answer('Добавлена запись')
     await msg.answer('Ответ на /new')
