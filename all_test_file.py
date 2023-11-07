@@ -8,6 +8,11 @@ from aiogram.types import Message
 
 from config import BOT_TOKEN, ADMIN_ID
 
+from app.Database.models import async_main
+
+
+
+
 bot = Bot(BOT_TOKEN)
 dp = Dispatcher()
 
@@ -53,10 +58,15 @@ async def send_start_message():
     await bot.send_message(chat_id= ADMIN_ID, text='Bot started!')
 
 async def main():
-    await send_start_message()
+    await async_main()
+    print('Bot started!')
+    await send_start_message()  # message to admin in telegram
     logging.basicConfig(level=logging.INFO)
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print('Exit')
